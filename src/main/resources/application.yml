@@ -4,5 +4,5 @@
 
 aws.s3:
   endpoint: http://localhost:4566
-  bucket: upload-json-file
+  bucket: upload
   region: us-east-1
