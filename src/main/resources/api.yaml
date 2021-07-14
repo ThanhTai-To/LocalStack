@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title: Title
+  description: Title
+  version: 1.0.0
+servers:
+  - url: 'https'
+paths:
+  /s3/upload:
+    post:
+      tags:
+        - uploadFile
+      summary: uploadFile
+      operationId: uploadFile
+      requestBody:
+        description: Create a json file with post data and upload to s3 local stack
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonRequestModel'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ObjectSuccessResponse'
+
+components:
+  schemas:
+    PersonRequestModel:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+    ObjectSuccessResponse:
+      type: object
+      properties:
+        responseCode:
+          type: string
+        message:
+          type: string
+  

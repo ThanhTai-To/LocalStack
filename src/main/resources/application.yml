@@ -1,0 +1,8 @@
+#spring:
+#  profiles:
+#    active: local
+
+aws.s3:
+  endpoint: http://localhost:4566
+  bucket: upload-json-file
+  region: us-east-1
