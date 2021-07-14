@@ -18,8 +18,6 @@ public class StorageServiceImpl implements StorageService {
     @Autowired
     private AwsS3ClientConfig awsS3Client;
 
-
-
     @Override
     public String upload(PersonRequestModel personRequestModel) {
         JSONObject jsonObject = new JSONObject();
