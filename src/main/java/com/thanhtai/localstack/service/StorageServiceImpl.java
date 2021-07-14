@@ -32,9 +32,9 @@ public class StorageServiceImpl implements StorageService {
             Writer writer = new OutputStreamWriter(new FileOutputStream(file));
             writer.write(jsonObject.toJSONString());
             writer.close();
-            log.info("Uploading a new object to " + awsS3Client.getAwsS3Bucket() + " from a file" + file + "\n with file name " + file.getName());
-
+            log.info("Uploading a new object to " + awsS3Client.getAwsS3Bucket() + " from " + file + "\n with file name " + file.getName());
             awsS3Client.amazonS3().putObject(new PutObjectRequest(awsS3Client.getAwsS3Bucket(), file.getName(), file));
+//            awsS3Client.amazonS3().putObject(awsS3Client.getAwsS3Bucket(), file.getName(), String.valueOf(new FileInputStream(file)));
         } catch (IOException e) {
             e.printStackTrace();
         }
