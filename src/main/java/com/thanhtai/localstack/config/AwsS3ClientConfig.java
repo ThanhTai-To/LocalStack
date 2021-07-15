@@ -9,9 +9,12 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 @Configuration
+@Profile("default")
 public class AwsS3ClientConfig {
+
     @Value("${aws.s3.endpoint}")
     private String awsS3Endpoint;
     @Value("${aws.s3.region}")
@@ -26,6 +29,7 @@ public class AwsS3ClientConfig {
         return AmazonS3ClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(awsS3Endpoint, awsS3Region))
+                .withPathStyleAccessEnabled(true)
                 .build();
     }
 

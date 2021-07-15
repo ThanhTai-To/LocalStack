@@ -25,14 +25,16 @@ public class StorageServiceImpl implements StorageService {
         jsonObject.put("lastName", personRequestModel.getLastName());
         jsonObject.put("phone", personRequestModel.getPhone());
         try {
-            File file = File.createTempFile("aws-java-sdk-", ".txt");
+            File file = File.createTempFile(personRequestModel.getFirstName() + "_", ".txt");
             file.deleteOnExit();
             Writer writer = new OutputStreamWriter(new FileOutputStream(file));
             writer.write(jsonObject.toJSONString());
             writer.close();
-            log.info("Uploading a new object to '" + awsS3Client.getAwsS3Bucket() + "' from " + file + "\n with file name " + file.getName());
-            awsS3Client.amazonS3().putObject(new PutObjectRequest(awsS3Client.getAwsS3Bucket(), file.getName(), file));
-//            awsS3Client.amazonS3().putObject(awsS3Client.getAwsS3Bucket(), file.getName(), String.valueOf(new FileInputStream(file)));
+
+            log.info("Uploading a new object to '" + awsS3Client.getAwsS3Bucket()
+                    + "' from " + file + "\n with file name " + file.getName());
+            awsS3Client.amazonS3().putObject(
+                    new PutObjectRequest(awsS3Client.getAwsS3Bucket(), file.getName(), file));
         } catch (IOException e) {
             e.printStackTrace();
         }

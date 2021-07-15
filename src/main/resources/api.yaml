@@ -23,7 +23,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ObjectSuccessResponse'
 
@@ -34,6 +34,7 @@ components:
       properties:
         firstName:
           type: string
+          minLength: 3
         lastName:
           type: string
         phone:
@@ -42,7 +43,9 @@ components:
       type: object
       properties:
         responseCode:
-          type: string
+          type: integer
         message:
+          type: string
+        data:
           type: string
   
